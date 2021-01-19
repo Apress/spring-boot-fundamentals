@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: contacts-app
+  name: contacts-app
+  namespace: spring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: contacts-app
+  template:
+    metadata:
+      labels:
+        app: contacts-app
+    spec:
+      containers:
+      - image: felipeg48/contacts-app:v1
+        name: contacts-app
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: prod
+        volumeMounts:
+          - mountPath: "/workspace/config"
+            name: contacts-config
+        livenessProbe:
+          initialDelaySeconds: 50
+          httpGet:
+            port: 8080
+            path: "/actuator/health/liveness"
+        readinessProbe:
+          initialDelaySeconds: 50
+          httpGet:
+            port: 8080
+            path: "/actuator/health/readiness"
+        resources:
+          requests:
+            memory: "732Mi"
+            cpu: "500m"
+          limits:
+            memory: "732Mi"
+            cpu: "500m"
+      volumes:
+        - name: contacts-config
+          configMap:
+            name: contacts-config
+            items:
+              - key: application.yaml
+                path: application.yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: contacts-app
+  name: contacts-app
+spec:
+  ports:
+  - name: 80-8080
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: contacts-app
+  type: ClusterIP

@@ -1,0 +1,48 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts App</title>
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+</head>
+<body>
+<div class="container theme-showcase" role="main">
+    <div class="jumbotron">
+        <h1>Contacts App</h1>
+        <p>A simple Spring MVC application</p>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <form action="#" th:action="@{/contact}" th:object="${contactForm}" method="post">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input class="form-control" type="text" th:field="*{name}" />
+                </div>
+                <input type="submit" value="Search" class="btn btn-primary"/>
+            </form>
+        </div>
+    </div>
+    <div class="page-header">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="contact: ${contacts}">
+                <td th:text="${contact.name}"/>
+                <td th:text="${contact.email}"/>
+                <td th:text="${contact.phone}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

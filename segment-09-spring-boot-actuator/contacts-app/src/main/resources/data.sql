@@ -1,0 +1,3 @@
+insert into contact (name,email,phone,password,active,roles) values('Matt','matt@email.com','1-800-CONTACT','admin',true,'ACTUATOR,ADMIN');
+insert into contact (name,email,phone,password,active,roles) values('Mark','mark@email.com','1-800-CONTACT','secret',false,'ACTUATOR,USER' );
+insert into contact (name,email,phone,password,active,roles) values('Mike','mike@email.com','1-800-CONTACT','simple',true,'USER');

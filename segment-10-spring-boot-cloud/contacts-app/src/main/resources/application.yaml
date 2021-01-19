@@ -1,0 +1,39 @@
+# Actuator INFO
+spring:
+  application:
+    name: contact-app
+info:
+  application-name: ${spring.application.name}
+  developer:
+    name: Awesome Developer
+    email: awesome@email.com
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-components: always
+      show-details: always
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod,kubernetes,cloud
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-components: never
+      show-details: never

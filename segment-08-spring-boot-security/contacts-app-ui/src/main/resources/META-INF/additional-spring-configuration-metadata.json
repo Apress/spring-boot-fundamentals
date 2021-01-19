@@ -1,0 +1,21 @@
+{
+  "properties": [
+    {
+      "name": "contacts.username",
+      "type": "java.lang.String",
+      "description": "Contacts Server username",
+      "defaultValue": "apress"
+  },
+    {
+      "name": "contacts.password",
+      "type": "java.lang.String",
+      "description": "Contacts Server password",
+      "defaultValue": "springboot"
+    },
+    {
+      "name": "contacts.server",
+      "type": "java.lang.String",
+      "description": "Contacts Server",
+      "defaultValue": "http://localhost:8080/contacts"
+    }
+  ] }
